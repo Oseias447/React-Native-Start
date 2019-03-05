@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
   KeyboardAvoidingView,
   View,
@@ -13,40 +12,44 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import api from './../../services/api';
+
 export default class Login extends Component {
   state = {
-    ursername: '',
+    username: '',
     loading: false,
+    error: false,
   };
 
-  async componentDidMount() {
-    const username = await AsyncStorage.getItem('@ReactStart:username');
-
-    this.setState({ loading: true });
-
-    if(username) {
-        this.props.navigation.navigate('Home');
-    }
-
-    this.setState({ loading: false });
+  saveUser = async (username) => {
+    await AsyncStorage.setItem('@ReactStart:username', username);
   }
 
-  handleInputChange = (ursername) => {
-    this.setState({ ursername });
-  };
+  checkUserExists = async (username) => {
+    const user = await api.get(`/users/${username}`);
 
-  handleLogin = async () => {
-    const { ursername } = this.state;
+    return user;
+  }
 
+  signIn = async () => {
+    const { username } = this.state;
+    const { navigation } = this.props;
+    this.setState({ loading: true });
 
-    if(!ursername.length) return;
+    try {
+      await this.checkUserExists(username);
+      await this.saveUser(username);
+      navigation.navigate('Home');
+    } catch (error) {
 
-    await AsyncStorage.setItem('@ReactStart:username', ursername);
+      this.setState({ loading: false, error: true });
+    }
 
-    this.props.navigation.navigate('Home');
-  };
+  }
 
   render() {
+    const { username, loading, error } = this.state;
+
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.content}>
@@ -54,17 +57,17 @@ export default class Login extends Component {
           <Icon name="sign-in" size={64} color="#535684" />
         </View>
 
+        { error && <Text style={styles.error}>Usuário inexistente!</Text>}
         <TextInput
           style={styles.input}
           placeholder="Nome de usuário"
-          value={this.state.ursername}
-          onChangeText={this.handleInputChange}
-          onSubmitEditing={this.handleLogin}
+          value={username}
+          onChangeText={text => this.setState({ username: text})}
           returnKeyType="send"
         />
 
-        <TouchableOpacity onPress={this.handleLogin} style={styles.button}>
-          { this.state.loading ? <ActivityIndicator size="small" color="#FFF" /> : <Text style={styles.buttonText}>Entrar</Text> }
+        <TouchableOpacity onPress={this.signIn} style={styles.button}>
+          { loading ? <ActivityIndicator size="small" color="#FFF" /> : <Text style={styles.buttonText}>Entrar</Text> }
         </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
 
     input: {
       borderWidth: 1,
-      borderColor: "#DDD",
+      borderColor: "#AAA",
       borderRadius: 5,
       height: 44,
       paddingHorizontal: 15,
@@ -110,5 +113,10 @@ const styles = StyleSheet.create({
       color: "#FFF",
       fontSize: 16,
       fontWeight: "bold"
+    },
+
+    error: {
+      color: 'red',
+      marginTop: 10,
     }
   });
