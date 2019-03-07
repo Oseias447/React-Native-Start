@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   KeyboardAvoidingView,
   View,
@@ -15,6 +16,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import api from './../../services/api';
 
 export default class Login extends Component {
+
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  }
+
   state = {
     username: '',
     loading: false,
@@ -74,7 +82,6 @@ export default class Login extends Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
     container: {

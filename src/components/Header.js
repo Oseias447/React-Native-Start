@@ -3,6 +3,7 @@ import { StyleSheet, AsyncStorage } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
+import PropTypes from 'prop-types';
 import {
   Container,
   Left,
@@ -17,6 +18,13 @@ import {
 } from 'native-base';
 
 class HeaderNavigation extends Component {
+
+  static propTypes = {
+    onPress: PropTypes.func.isRequired,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  }
 
   signOut = async () => {
     const { navigation } = this.props;

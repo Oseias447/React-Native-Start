@@ -3,12 +3,20 @@ import {
   Container,
   Drawer,
 } from 'native-base';
+import PropTypes from 'prop-types';
 
 import Home from '../../components/Home';
 import SideBar from '../../components/SideBar';
 import Header from '../../components/Header';
 
  export default class MainDrawer extends Component {
+
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  }
+
   closeDrawer() {
     this.drawer._root.close()
   }
@@ -30,4 +38,8 @@ import Header from '../../components/Header';
       </Drawer>
     );
   }
+}
+
+MainDrawer.PropTypes = {
+
 }

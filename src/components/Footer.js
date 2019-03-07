@@ -1,11 +1,12 @@
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
+import PropTypes from 'prop-types';
 import {
-    Footer,
-    FooterTab,
-    Button,
-  } from 'native-base';
+  Footer,
+  FooterTab,
+  Button,
+} from 'native-base';
 
   const footer = ({ navigation }) => (
     <Footer>
@@ -27,3 +28,9 @@ import {
   );
 
   export default withNavigation(footer);
+
+  footer.propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  }

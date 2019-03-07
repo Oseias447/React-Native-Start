@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types';
 import {
     Content,
     Left,
@@ -19,6 +20,13 @@ import {
 } from 'native-base';
 
 export default class Notification extends Component {
+
+    static propTypes = {
+      navigation: PropTypes.shape({
+        navigate: PropTypes.func.isRequired,
+      }).isRequired,
+    }
+
     state = {
         notifications: [
             { id: 1, title: 'Pediu para participar do grupo', author: 'Oséias Silva', author_avatar: 'https://avatars0.githubusercontent.com/u/35711742?s=460&v=4', grupo: 'Preço Justo' ,time: 'Há 23 minutos' },

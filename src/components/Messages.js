@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
+import PropTypes from 'prop-types';
 import {
     Content,
     Left,
@@ -19,16 +20,22 @@ import {
     Right,
     Fab,
 } from 'native-base';
-import Footer from './Footer';
 
 class Messages extends Component {
-    state = {
-        messages: [
-            { id: 1, name: 'Diego Fernandes', avatar_url: 'https://avatars0.githubusercontent.com/u/2254731?s=460&v=4', last_message: 'Lorem ipsum', time: '18:20 PM' },
-            { id: 2,name: 'Claudio Orlandi', avatar_url: 'https://secure.gravatar.com/avatar/4a75e363796021a2bc2b9f805bacc2da?s=500&d=mm&r=g', last_message: 'Lorem ipsum', time: '10:12 AM' },
-            { id: 3,name: 'Oseias Silva',   avatar_url: 'https://avatars0.githubusercontent.com/u/35711742?s=460&v=4', last_message: 'Lorem ipsum', time: '11:27 AM' },
-        ],
-    }
+
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  }
+
+  state = {
+      messages: [
+          { id: 1, name: 'Diego Fernandes', avatar_url: 'https://avatars0.githubusercontent.com/u/2254731?s=460&v=4', last_message: 'Lorem ipsum', time: '18:20 PM' },
+          { id: 2,name: 'Claudio Orlandi', avatar_url: 'https://secure.gravatar.com/avatar/4a75e363796021a2bc2b9f805bacc2da?s=500&d=mm&r=g', last_message: 'Lorem ipsum', time: '10:12 AM' },
+          { id: 3,name: 'Oseias Silva',   avatar_url: 'https://avatars0.githubusercontent.com/u/35711742?s=460&v=4', last_message: 'Lorem ipsum', time: '11:27 AM' },
+      ],
+  }
 
     render() {
       return(
@@ -69,7 +76,6 @@ class Messages extends Component {
                 <Icon type="FontAwesome" name="comment" />
               </Fab>
             </View>
-            <Footer />
         </Container>
       );
     }
