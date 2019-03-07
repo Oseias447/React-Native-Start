@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {
     Content,
     Left,
@@ -10,6 +11,11 @@ import {
     Right,
     List,
     ListItem,
+    Container,
+    Header,
+    Button,
+    View,
+    Title,
 } from 'native-base';
 
 export default class Notification extends Component {
@@ -23,36 +29,49 @@ export default class Notification extends Component {
 
     render() {
         return(
-          <Content>
-            <List>
-              <Text style={styles.barra}>
-                <Text>Novas</Text>
-              </Text>
-              {notifications.map( notification => (
-              <ListItem avatar key={notification.id}>
+          <Container>
+              <Header>
                 <Left>
-                  <Thumbnail source={{ uri: notification.author_avatar}} />
+                  <Button transparent onPress={()=> this.props.navigation.navigate('Home')} >
+                    <FontAwesome name='chevron-left' size={20} style={{color: "#FFF"}} />
+                  </Button>
                 </Left>
-                <Body>
-                  <Text>{notification.author}</Text>
-                  <Text note>{notification.title} {notification.grupo}</Text>
-                  <Text note>{notification.time}</Text>
-                </Body>
-                <Right>
-                  <Icon type="FontAwesome" name="ellipsis-h" />
-                </Right>
-              </ListItem>
-              ))}
-            </List>
-          </Content>
+                <View style={styles.title}>
+                  <Title>Notifications</Title>
+                </View>
+                <Right />
+              </Header>
+              <Content>
+                <List>
+                  {this.state.notifications.map( notification => (
+                  <ListItem avatar key={notification.id}>
+                    <Left>
+                      <Thumbnail source={{ uri: notification.author_avatar}} />
+                    </Left>
+                    <Body>
+                      <Text>{notification.author}</Text>
+                      <Text note>{notification.title} {notification.grupo}</Text>
+                      <Text note>{notification.time}</Text>
+                    </Body>
+                    <Right>
+                      <Icon type="FontAwesome" name="ellipsis-h" />
+                    </Right>
+                  </ListItem>
+                  ))}
+                </List>
+              </Content>
+          </Container>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    barra: {
-      paddingLeft: 10,
-      backgroundColor: '#FFFFFF',
-      fontFamily: 'sansSerif',
+    title: {
+      flex: 1,
+      color: '#FFF',
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      paddingLeft: 75,
     }
 });

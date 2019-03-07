@@ -1,29 +1,29 @@
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import { withNavigation } from 'react-navigation';
 import {
     Footer,
     FooterTab,
     Button,
-    Icon,
-    Text,
-    Badge,
   } from 'native-base';
 
-  const footer = () => (
+  const footer = ({ navigation }) => (
     <Footer>
       <FooterTab>
-        <Button badge vertical>
+        <Button vertical
+        onPress={() => navigation.navigate('Home')}>
           <FontAwesome name="home" size={30} color="#fff" />
         </Button>
-        <Button badge center style={{ size: 10 }}>
+        <Button center style={{ size: 10 }}>
           <FontAwesome name="plus-square" size={25} color="#fff"  />
         </Button>
-        <Button badge>
-          <FontAwesome  name="envelope" size={30} color="#fff"/>
+        <Button vertical
+        onPress={() => navigation.navigate('Messages')}
+        >
+          <FontAwesome name="envelope" size={30} color="#fff"  />
         </Button>
       </FooterTab>
     </Footer>
   );
 
-  export default footer;
+  export default withNavigation(footer);

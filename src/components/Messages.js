@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { withNavigation } from 'react-navigation';
 import {
     Content,
     Left,
@@ -7,9 +10,18 @@ import {
     Text,
     List,
     ListItem,
+    Header,
+    Container,
+    Button,
+    Icon,
+    View,
+    Title,
+    Right,
+    Fab,
 } from 'native-base';
+import Footer from './Footer';
 
-export default class Messages extends Component {
+class Messages extends Component {
     state = {
         messages: [
             { id: 1, name: 'Diego Fernandes', avatar_url: 'https://avatars0.githubusercontent.com/u/2254731?s=460&v=4', last_message: 'Lorem ipsum', time: '18:20 PM' },
@@ -20,22 +32,58 @@ export default class Messages extends Component {
 
     render() {
       return(
-        <Content>
-          <List>
-            {this.state.messages.map( message => (
-              <ListItem avatar key={message.id}>
-                <Left>
-                  <Thumbnail source={{ uri: message.avatar_url}} />
-                </Left>
-                <Body>
-                  <Text>{message.name}</Text>
-                  <Text note>{message.last_message}</Text>
-                  <Text note>{message.time}</Text>
-                </Body>
-              </ListItem>
-            ))}
-          </List>
-        </Content>
+        <Container>
+          <Header>
+            <Left>
+              <Button transparent onPress={()=> this.props.navigation.navigate('Home')} >
+                <FontAwesome name='chevron-left' size={20} style={{color: "#FFF"}} />
+              </Button>
+            </Left>
+            <View style={styles.title}>
+              <Title>Messages</Title>
+            </View>
+            <Right />
+          </Header>
+            <Content>
+              <List>
+                {this.state.messages.map( message => (
+                  <ListItem avatar key={message.id}>
+                    <Left>
+                      <Thumbnail source={{ uri: message.avatar_url}} />
+                    </Left>
+                    <Body>
+                      <Text>{message.name}</Text>
+                      <Text note>{message.last_message}</Text>
+                      <Text note>{message.time}</Text>
+                    </Body>
+                  </ListItem>
+                ))}
+              </List>
+            </Content>
+            <View>
+              <Fab
+                direction="up"
+                position="bottomRight"
+                style={{ backgroundColor: "#AAA"}}
+              >
+                <Icon type="FontAwesome" name="comment" />
+              </Fab>
+            </View>
+            <Footer />
+        </Container>
       );
     }
 }
+
+export default withNavigation(Messages);
+
+const styles = StyleSheet.create({
+  title: {
+    flex: 1,
+    color: '#FFF',
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingLeft: 75,
+  }
+})

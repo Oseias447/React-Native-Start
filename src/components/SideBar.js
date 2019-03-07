@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { withNavigation } from 'react-navigation';
+import { StyleSheet } from 'react-native';
 import {
     Container,
     Header,
@@ -13,15 +15,37 @@ import {
     Button,
  } from 'native-base';
 
-export default class SideBar extends Component {
+import { AsyncStorage } from 'react-native';
+
+class SideBar extends Component {
+
+  signOut = () => {
+    const { navigation } = this.props;
+
+    AsyncStorage.clear();
+
+    navigation.navigate('Login');
+
+  }
+
+  chatBox = () => {
+    const { navigation } = this.props;
+
+    navigation.navigate('Messages')
+  }
+
   render() {
     return (
     <Container>
-      <Header />
+      <Header style={styles.header}>
+        <Text>Seja Bem Vindo!</Text>
+      </Header>
       <Content>
         <ListItem icon>
           <Left>
-            <Button style={{ backgroundColor: "#FF9501", top: 4 }}>
+            <Button
+            onPress={()=> this.chatBox()}
+            style={{ backgroundColor: "#FF9501", top: 4 }}>
               <Icon name="chatboxes" size={25} color="#fff" />
             </Button>
           </Left>
@@ -47,7 +71,7 @@ export default class SideBar extends Component {
         </ListItem>
         <ListItem icon>
           <Left>
-            <Button style={{ backgroundColor: "#007AFF", top: 4 }}>
+            <Button onPress={()=> this.signOut()} style={{ backgroundColor: "#007AFF", top: 4 }}>
               <FontAwesome name="sign-out" size={20} color="#fff" />
             </Button>
           </Left>
@@ -60,3 +84,17 @@ export default class SideBar extends Component {
     );
   }
 }
+export default withNavigation(SideBar);
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "column",
+    backgroundColor: "#FFFF",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  }
+});
