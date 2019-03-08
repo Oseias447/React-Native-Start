@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import { StyleSheet, AsyncStorage } from 'react-native';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { AsyncStorage } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import {
-  Container,
   Left,
   Icon,
   Button,
   Right,
-  Drawer,
   Badge,
   Text,
   Header,
   View,
 } from 'native-base';
+import styles from './styles';
 
 class HeaderNavigation extends Component {
 
@@ -36,20 +34,23 @@ class HeaderNavigation extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    const { onPress } = this.props;
+
     return(
       <Header style={styles.container}>
         <Left>
-          <Button transparent onPress={this.props.onPress} >
+          <Button transparent onPress={onPress} >
             <Icon name='menu' style={{color: "#FFF"}} />
           </Button>
         </Left>
           <Button transparent onPress={()=> {}} style={{left: 30}}>
             <FontAwesome name='home' size={24} style={{color: "#FFF"}} />
           </Button>
-          <Button transparent onPress={()=> this.props.navigation.navigate('Messages')} style={{left: 65}}>
+          <Button transparent onPress={()=> navigation.navigate('Messages')} style={{left: 65}}>
             <FontAwesome name='envelope-o' size={24} style={{color: "#FFF"}} />
           </Button>
-          <Button badge transparent onPress={()=> this.props.navigation.navigate('Notification')} style={{left: 95}}>
+          <Button badge transparent onPress={()=> navigation.navigate('Notification')} style={{left: 95}}>
             <FontAwesome name='bell-o' size={24} style={{color: "#FFF"}} /><Badge><Text style={{fontSize: 12}}>3</Text></Badge>
           </Button>
         <Right />
@@ -66,29 +67,3 @@ class HeaderNavigation extends Component {
 }
 
 export default withNavigation(HeaderNavigation);
-
-const styles = StyleSheet.create({
-  container: {
-    height: 30 + getStatusBarHeight(),
-    paddingTop: 1,
-    borderBottomWidth: 1,
-    borderBottomColor: '#EEE',
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#FFF',
-    position: "absolute",
-    top: -10,
-    paddingLeft: 60,
-
-  },
-  signOut: {
-    position: "relative",
-    flexDirection: "row",
-    top: 0,
-  }
-});

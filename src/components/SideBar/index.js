@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
-import { StyleSheet } from 'react-native';
 import {
     Container,
     Header,
@@ -16,6 +15,7 @@ import {
  } from 'native-base';
 
 import { AsyncStorage } from 'react-native';
+import styles from './styles';
 
 class SideBar extends Component {
 
@@ -85,16 +85,3 @@ class SideBar extends Component {
   }
 }
 export default withNavigation(SideBar);
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: "column",
-    backgroundColor: "#FFFF",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 16,
-  }
-});

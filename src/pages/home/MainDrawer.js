@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Drawer,
-} from 'native-base';
+import { Container, Drawer } from 'native-base';
 import PropTypes from 'prop-types';
 
 import Home from '../../components/Home';
 import SideBar from '../../components/SideBar';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
  export default class MainDrawer extends Component {
 
@@ -34,6 +32,7 @@ import Header from '../../components/Header';
       <Container>
           <Header onPress={()=> this.openDrawer()}/>
           <Home />
+          <Footer />
       </Container>
       </Drawer>
     );
