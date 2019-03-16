@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import createNavigator from './routes';
+import React, { Component, Fragment } from 'react';
 import { AsyncStorage } from 'react-native';
+import 'react-native-gesture-handler';
 
-export default class App extends Component {
+import createNavigator from '../src/navigation/MainNavigation';
+
+class App extends Component {
 
   state = {
     userChecked: false,
@@ -17,13 +19,20 @@ export default class App extends Component {
       userLogged: !!username,
     })
   }
+
   render() {
     const { userChecked, userLogged } = this.state;
 
     if (!userChecked) return null;
 
-    const Routes = createNavigator(userLogged);
+    const Navigation = createNavigator(userLogged);
 
-    return <Routes />;
+    return (
+      <Fragment>
+        <Navigation />
+      </Fragment>
+    );
   }
 }
+
+export default App;

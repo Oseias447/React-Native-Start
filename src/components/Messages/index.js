@@ -7,21 +7,25 @@ import {
     Left,
     Thumbnail,
     Body,
-    Text,
     List,
     ListItem,
-    Header,
     Container,
-    Button,
-    Icon,
-    View,
-    Title,
-    Right,
     Fab,
 } from 'native-base';
+import { Text, View } from 'react-native';
 import styles from './styles';
 
+import Header from '../Header'
+import Icon  from 'react-native-vector-icons/FontAwesome';
 class Messages extends Component {
+
+  static navigationOptions = {
+
+    tabBarIcon: ({ tintColor }) => (
+       <Icon name='envelope' size={20} style={{color: tintColor}} />
+    ),
+    headerRight: <Icon name='exit' style={{paddingRight: 10}} />
+  }
 
   static propTypes = {
     navigation: PropTypes.shape({
@@ -38,21 +42,10 @@ class Messages extends Component {
   }
 
     render() {
-      const { navigation } = this.props;
 
       return(
         <Container>
-          <Header>
-            <Left>
-              <Button transparent onPress={()=> navigation.navigate('Home')} >
-                <FontAwesome name='chevron-left' size={20} style={{color: "#FFF"}} />
-              </Button>
-            </Left>
-            <View style={styles.title}>
-              <Title>Messages</Title>
-            </View>
-            <Right />
-          </Header>
+          <Header name='Messages'/>
             <Content>
               <List>
                 {this.state.messages.map( message => (
@@ -69,15 +62,13 @@ class Messages extends Component {
                 ))}
               </List>
             </Content>
-            <View>
               <Fab
                 direction="up"
                 position="bottomRight"
                 style={{ backgroundColor: "#AAA"}}
               >
-                <Icon type="FontAwesome" name="comment" />
+              <Icon type="FontAwesome" name="comment" />
               </Fab>
-            </View>
         </Container>
       );
     }

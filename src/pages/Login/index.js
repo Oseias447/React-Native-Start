@@ -61,22 +61,22 @@ export default class Login extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.content}>
-        <View>
-          <Icon name="sign-in" size={64} color="#535684" />
-        </View>
+          <View>
+            <Icon name="sign-in" size={64} color="#535684" />
+          </View>
 
-        { error && <Text style={styles.error}>Usuário inexistente!</Text>}
-        <TextInput
-          style={styles.input}
-          placeholder="Nome de usuário"
-          value={username}
-          onChangeText={text => this.setState({ username: text})}
-          returnKeyType="send"
-        />
+          { error && <Text style={styles.error}>Usuário inexistente!</Text>}
+          <TextInput
+            style={styles.input}
+            placeholder="Nome de usuário"
+            value={username}
+            onChangeText={text => this.setState({ username: text})}
+            returnKeyType="send"
+          />
 
-        <TouchableOpacity onPress={this.signIn} style={styles.button}>
-          { loading ? <ActivityIndicator size="small" color="#FFF" /> : <Text style={styles.buttonText}>Entrar</Text> }
-        </TouchableOpacity>
+          <TouchableOpacity onPress={this.signIn} style={styles.button}>
+            { loading ? <ActivityIndicator size="small" color="#FFF" /> : <Text style={styles.buttonText}>Entrar</Text> }
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     );

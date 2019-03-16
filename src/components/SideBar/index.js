@@ -38,14 +38,14 @@ class SideBar extends Component {
     return (
     <Container>
       <Header style={styles.header}>
-        <Text>Seja Bem Vindo!</Text>
+        <Text style={styles.title}>Bem Vindo!</Text>
       </Header>
       <Content>
         <ListItem icon>
           <Left>
             <Button
             onPress={()=> this.chatBox()}
-            style={{ backgroundColor: "#FF9501", top: 4 }}>
+            style={{ top: 4 }}>
               <Icon name="chatboxes" size={25} color="#fff" />
             </Button>
           </Left>
@@ -78,6 +78,9 @@ class SideBar extends Component {
           <Body>
             <Text>Sair</Text>
           </Body>
+          <Right>
+            <FontAwesome name="angle-right" size={25} />
+          </Right>
         </ListItem>
       </Content>
     </Container>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 import {
     Content,
@@ -7,20 +6,22 @@ import {
     Thumbnail,
     Body,
     Text,
-    Icon,
     Right,
     List,
     ListItem,
     Container,
-    Header,
-    Button,
-    View,
-    Title,
 } from 'native-base';
-import styles from './styles';
+import Icon  from 'react-native-vector-icons/FontAwesome';
+import Header from '../Header';
 
 export default class Notification extends Component {
 
+  static navigationOptions = {
+
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name='bell' size={20} style={{color: tintColor}} />
+    )
+  }
     static propTypes = {
       navigation: PropTypes.shape({
         navigate: PropTypes.func.isRequired,
@@ -36,21 +37,10 @@ export default class Notification extends Component {
     }
 
     render() {
-      const { navigation } = this.props;
 
       return(
       <Container>
-          <Header>
-            <Left>
-              <Button transparent onPress={()=> navigation.navigate('Home')} >
-                <FontAwesome name='chevron-left' size={20} style={{color: "#FFF"}} />
-              </Button>
-            </Left>
-            <View style={styles.title}>
-              <Title>Notifications</Title>
-            </View>
-            <Right />
-          </Header>
+        <Header name='Notifications'/>
           <Content>
             <List>
               {this.state.notifications.map( notification => (
