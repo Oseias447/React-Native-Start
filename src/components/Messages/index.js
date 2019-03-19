@@ -43,35 +43,35 @@ class Messages extends Component {
 
     render() {
 
-      return(
-        <Container>
-          <Header name='Messages'/>
-            <Content>
-              <List>
-                {this.state.messages.map( message => (
-                  <ListItem avatar key={message.id}>
-                    <Left>
-                      <Thumbnail source={{ uri: message.avatar_url}} />
-                    </Left>
-                    <Body>
-                      <Text>{message.name}</Text>
-                      <Text note>{message.last_message}</Text>
-                      <Text note>{message.time}</Text>
-                    </Body>
-                  </ListItem>
-                ))}
-              </List>
-            </Content>
-              <Fab
-                direction="up"
-                position="bottomRight"
-                style={{ backgroundColor: "#AAA"}}
-              >
-              <Icon type="FontAwesome" name="comment" />
-              </Fab>
-        </Container>
-      );
-    }
+    return(
+      <Container>
+        <Header name='Messages'/>
+          <Content>
+            <List>
+              {this.state.messages.map( message => (
+                <ListItem avatar key={message.id}>
+                  <Left>
+                    <Thumbnail source={{ uri: message.avatar_url}} />
+                  </Left>
+                  <Body>
+                    <Text>{message.name}</Text>
+                    <Text note>{message.last_message}</Text>
+                    <Text note>{message.time}</Text>
+                  </Body>
+                </ListItem>
+              ))}
+            </List>
+          </Content>
+            <Fab
+              direction="up"
+              position="bottomRight"
+              style={{ backgroundColor: "#AAA"}}
+            >
+            <Icon type="FontAwesome" name="comment" />
+            </Fab>
+      </Container>
+    );
+  }
 }
 
 export default withNavigation(Messages);

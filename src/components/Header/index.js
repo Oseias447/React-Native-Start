@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, TouchableOpacity} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
@@ -40,9 +40,9 @@ class HeaderNavigation extends Component {
     return(
       <Header style={styles.container}>
         <Left>
-          <Button transparent onPress={() => navigation.openDrawer()} >
+          <TouchableOpacity transparent onPress={() => navigation.openDrawer()} >
             <Icon name='menu' style={{color: "#000"}} />
-          </Button>
+          </TouchableOpacity>
         </Left>
           <Text style={{ flexDirection: 'row', justifyContent: 'space-between'}}>{this.props.name}</Text>
         <Right />

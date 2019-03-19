@@ -6,63 +6,44 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  AsyncStorage,
   ActivityIndicator,
+  AsyncStorage,
 } from 'react-native';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Creators as LoginActions } from '../../store/ducks/login';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 
-import api from './../../services/api';
-
-export default class Login extends Component {
+class Login extends Component {
 
   static propTypes = {
     navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
+      navigate: PropTypes.func,
+    }),
   }
 
-  state = {
-    username: '',
-    loading: false,
-    error: false,
-  };
-
-  saveUser = async (username) => {
-    await AsyncStorage.setItem('@ReactStart:username', username);
-  }
-
-  checkUserExists = async (username) => {
-    const user = await api.get(`/users/${username}`);
-
-    return user;
-  }
+  state = { username: '' };
 
   signIn = async () => {
     const { username } = this.state;
-    const { navigation } = this.props;
-    this.setState({ loading: true });
+    const { loginRequest } = this.props;
 
-    try {
-      await this.checkUserExists(username);
-      await this.saveUser(username);
-      navigation.navigate('Home');
-    } catch (error) {
-
-      this.setState({ loading: false, error: true });
-    }
-
+    await loginRequest(username);
   }
 
   render() {
-    const { username, loading, error } = this.state;
+    const { username } = this.state;
+    const { error, loading } = this.props;
 
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.content}>
           <View>
-            <Icon name="sign-in" size={64} color="#535684" />
+            <Icon name="github" size={64} color="#535684" />
+            <Text>Git Hub</Text>
           </View>
 
           { error && <Text style={styles.error}>Usuário inexistente!</Text>}
@@ -83,3 +64,12 @@ export default class Login extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  error: state.login.error,
+  loading: state.login.loading,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(LoginActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

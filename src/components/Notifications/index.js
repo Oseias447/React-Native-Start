@@ -38,30 +38,30 @@ export default class Notification extends Component {
 
     render() {
 
-      return(
-      <Container>
-        <Header name='Notifications'/>
-          <Content>
-            <List>
-              {this.state.notifications.map( notification => (
-              <ListItem avatar key={notification.id}>
-                <Left>
-                  <Thumbnail source={{ uri: notification.author_avatar}} />
-                </Left>
-                <Body>
-                  <Text>{notification.author}</Text>
-                  <Text note>{notification.title} {notification.grupo}</Text>
-                  <Text note>{notification.time}</Text>
-                </Body>
-                <Right>
-                  <Icon type="FontAwesome" name="ellipsis-h" />
-                </Right>
-              </ListItem>
-              ))}
-            </List>
-          </Content>
-      </Container>
-      );
-    }
+    return(
+    <Container>
+      <Header name='Notifications'/>
+        <Content>
+          <List>
+            {this.state.notifications.map( notification => (
+            <ListItem avatar key={notification.id}>
+              <Left>
+                <Thumbnail source={{ uri: notification.author_avatar}} />
+              </Left>
+              <Body>
+                <Text>{notification.author}</Text>
+                <Text note>{notification.title} {notification.grupo}</Text>
+                <Text note>{notification.time}</Text>
+              </Body>
+              <Right>
+                <Icon type="FontAwesome" name="ellipsis-h" />
+              </Right>
+            </ListItem>
+            ))}
+          </List>
+        </Content>
+    </Container>
+    );
+  }
 }
 
