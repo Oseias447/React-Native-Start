@@ -22,7 +22,7 @@ import Header from '../../components/Header';
 class Repositories extends Component {
 
   static navigationOptions = {
-    Title: 'Home',
+    Title: 'Repositories',
     tabBarIcon: ({ tintColor }) => (
       <Icon name='home' size={20} style={{color: tintColor}}
     />

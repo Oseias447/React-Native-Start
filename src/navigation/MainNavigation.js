@@ -6,13 +6,13 @@ import 'react-native-gesture-handler';
 import LoginScreen from '../pages/Login';
 import DrawerNavigation from './DrawerNavigation';
 
-const MainNavigation = createAppContainer(createSwitchNavigator(
+const MainNavigation = (userLogged = false) =>  createAppContainer(createSwitchNavigator(
   {
     Login: { screen: LoginScreen },
     Drawer: { screen: DrawerNavigation },
   },
   {
-    initialRouteName: 'Drawer',
+    initialRouteName: userLogged ? 'Drawer' : 'Login',
   }
 ));
 

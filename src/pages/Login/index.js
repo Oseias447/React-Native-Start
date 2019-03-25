@@ -27,11 +27,16 @@ class Login extends Component {
 
   state = { username: '' };
 
+  saveUser = async (username) => {
+    await AsyncStorage.setItem('@ReactStart:username', username);
+ }
+
   signIn = async () => {
     const { username } = this.state;
     const { loginRequest } = this.props;
 
-    await loginRequest(username);
+    loginRequest(username);
+    await this.saveUser(username);
   }
 
   render() {
