@@ -7,13 +7,12 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  AsyncStorage,
 } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Creators as LoginActions } from '../../store/ducks/login';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 
