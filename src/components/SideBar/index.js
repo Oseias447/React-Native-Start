@@ -14,7 +14,7 @@ import {
     Button,
  } from 'native-base';
 
-import { AsyncStorage } from 'react-native';
+ import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
 
 class SideBar extends Component {

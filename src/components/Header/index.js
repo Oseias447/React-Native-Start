@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { AsyncStorage, TouchableOpacity} from 'react-native';
+import { TouchableOpacity} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';

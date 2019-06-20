@@ -28,7 +28,7 @@ class Login extends Component {
 
   saveUser = async (username) => {
     await AsyncStorage.setItem('@ReactStart:username', username);
- }
+  }
 
   signIn = async () => {
     const { username } = this.state;
