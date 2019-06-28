@@ -43,7 +43,7 @@ class Login extends Component {
     const { error, loading } = this.props;
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <View behavior="padding" style={styles.container}>
         <View style={styles.content}>
           <View>
             <Icon name="github" size={64} color="#535684" />
@@ -63,7 +63,7 @@ class Login extends Component {
             { loading ? <ActivityIndicator size="small" color="#FFF" /> : <Text style={styles.buttonText}>Entrar</Text> }
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
+      </View>
     );
   }
 }
